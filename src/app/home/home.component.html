@@ -1,0 +1,26 @@
+<a (click)="addNewNumber()" class=" float btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    <i class="fa fa-plus my-float"></i>
+</a>
+<div class="alert alert-danger" role="alert" *ngIf="api.errorFlag && api.golbalError">
+   Check your internet connection
+</div>
+<ul *ngIf="numbers">
+    <li *ngFor="let num of numbers">
+        <div class="card w-50">
+            <div class="card-body">
+                <p class="card-title">{{num.name}}</p>
+                <p class="card-text">{{num.phone}}</p>
+                <button (click)="updateNumber(num)" class="btn btn-primary" data-toggle="modal"
+                    data-target="#exampleModalCenter">Edit</button>
+                <button (click)="deleteNumber(num)" class="btn btn-primary" [disabled]="api.deleteFlag">
+                    <span *ngIf="api.deleteFlag" class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span>
+                    <span *ngIf="api.deleteFlag">Loading...</span>
+                    <span *ngIf="!api.deleteFlag">Delete</span>
+                </button>
+            </div>
+        </div>
+    </li>
+</ul>
+
+<app-new-number-form [numberToUpdate]="selectedNumber"></app-new-number-form>

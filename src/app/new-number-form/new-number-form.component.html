@@ -1,0 +1,61 @@
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                    {{numberToUpdate ? 'Update Number' : 'Add  New Number' }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form [formGroup]="numberForm"
+                (ngSubmit)="numberToUpdate? updateNumber (numberToUpdate , numberForm.controls.name.value ,
+             numberForm.controls.phone.value):addNewNumber(numberForm.controls.name.value, numberForm.controls.phone.value)"
+                class="needs-validation">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input class='form-control' id="name" type="text" formControlName="name">
+                        <div *ngIf="submitted && numberForm.controls.name.errors">
+                            <div class="alert alert-danger" role="alert" *ngIf="numberForm.controls.name.errors.required">
+                                Name is required!
+                            </div>
+                        </div>
+                        <div *ngIf = "api.errorFlag && api.createUpadateError.name">
+                            <div class="alert alert-danger" role="alert" *ngFor= "let errMsg of api.createUpadateError.name" >
+                                   {{errMsg}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="number">Number :</label>
+                        <input id="number" class='form-control' type="text" formControlName="phone" required>
+                        <div *ngIf="submitted && numberForm.controls.phone.errors">
+                            <div class="alert alert-danger" role="alert" *ngIf="numberForm.controls.phone.errors.required">
+                                Number is required!
+                            </div>
+                        </div>
+                        <div *ngIf = "api.errorFlag && api.createUpadateError.phone">
+                            <div class="alert alert-danger" role="alert" *ngFor= "let errMsg of api.createUpadateError.phone" >
+                                   {{errMsg}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-success" role="alert" *ngIf = "api.createUpdateSuccFlag && submitted ">
+                    {{numberToUpdate ? 'Number Updated Successfully' : 'Number added Successfully' }}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit" [disabled]="api.createUpdateFlag">
+                        <span *ngIf="api.createUpdateFlag" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span *ngIf="api.createUpdateFlag">Loading...</span>
+                        <span *ngIf="!api.createUpdateFlag">{{numberToUpdate ? 'Update Number' : 'Add  New Number' }}</span>
+                    </button>
+              
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

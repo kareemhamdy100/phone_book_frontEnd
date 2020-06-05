@@ -1,0 +1,11 @@
+<form [formGroup]="searchForm" class="form-inline my-2 my-lg-0" (ngSubmit)="search(searchForm.controls.search.value)">
+  <input (change)="search(searchForm.controls.search.value)" (keyup)="search(searchForm.controls.search.value)"
+    class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" formControlName="search">
+  <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" [disabled]= "api.searchFlag" >
+    <div [hidden] = "!api.searchFlag">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      <span class="sr-only">Loading...</span>
+    </div>
+   <i  [hidden] = "api.searchFlag">Search</i> 
+  </button>
+</form>
