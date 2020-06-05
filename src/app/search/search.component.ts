@@ -8,7 +8,7 @@ import { ApiService } from '../api.service';
 })
 export class SearchComponent implements OnInit {
   searchForm: FormGroup;
-  constructor(private api: ApiService, private formBuilder: FormBuilder) {
+  constructor(public api: ApiService, private formBuilder: FormBuilder) {
     this.searchForm = this.formBuilder.group({
       search: ['', Validators.required]
     });

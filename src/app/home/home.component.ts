@@ -8,7 +8,7 @@ import { ApiService } from '../api.service';
 export class HomeComponent implements OnInit {
   selectedNumber: Object;
   numbers: Object;
-  constructor(private api: ApiService) {
+  constructor(public api: ApiService) {
   }
 
   ngOnInit(): void {

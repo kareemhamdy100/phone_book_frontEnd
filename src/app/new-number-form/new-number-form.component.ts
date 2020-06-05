@@ -20,7 +20,7 @@ export class NewNumberFormComponent implements OnInit {
 
   submitted = false;
 
-  constructor(private api: ApiService, private formBuilder: FormBuilder) { }
+  constructor(public api: ApiService, private formBuilder: FormBuilder) { }
 
   addNewNumber(name, phone) {
     this.submitted = true;
